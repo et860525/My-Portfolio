@@ -1,18 +1,21 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import Home from './components/Home.vue'
+import Nav from './components/Nav.vue'
+import NavItem from './components/NavItem.vue'
 </script>
 
 <template>
-  <nav class="py-4 px-6 text-sm font-medium">
-    <ul class="flex space-x-3 justify-center">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-  <Home />
+  <Nav>
+    <!-- router-link 經過編譯會變成 <a> -->
+    <!-- 用 to 屬性來處理 URL -->
+    <NavItem to="/">Home</NavItem>
+    <NavItem to="/about">About</NavItem>
+    <NavItem to="/contact">Contact</NavItem>
+  </Nav>
+
+  <!-- 根據 route 渲染相對的 .vue -->
+  <router-view></router-view>
 </template>
 
 <style>
