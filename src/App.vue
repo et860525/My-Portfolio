@@ -6,16 +6,16 @@ import NavItem from './components/NavItem.vue'
 </script>
 
 <template>
-  <Nav>
+  <Nav class="text-slate-700">
     <!-- router-link 經過編譯會變成 <a> -->
     <!-- 用 to 屬性來處理 URL -->
-    <NavItem to="/">Home</NavItem>
+    <NavItem to="/" :isActive="true">Home</NavItem>
     <NavItem to="/about">About</NavItem>
     <NavItem to="/contact">Contact</NavItem>
   </Nav>
 
   <!-- 根據 route 渲染相對的 .vue -->
-  <router-view></router-view>
+  <router-view class="text-slate-700 text-lg"></router-view>
 </template>
 
 <style>
@@ -24,6 +24,5 @@ import NavItem from './components/NavItem.vue'
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 </style>
