@@ -13,8 +13,11 @@
 </script>
 
 <template>
-	<div class="border border-dashed text-center">
-		<h1 class="py-3">{{title}}</h1>
-		<p class="py-2 px-4">{{text}}</p>
+	<div class="border border-dashed border-slate-700 rounded text-center">
+		<div class="p-6">
+			<h1 class="font-bold">{{title}}</h1>
+			<hr>
+			<p class="pt-4 leading-loose">{{text}}</p>
+		</div>
 	</div>
 </template>

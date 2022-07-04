@@ -4,17 +4,28 @@
   const cards = [
     {
       title: "JavaScript",
-      text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure sequi, minima maiores temporibus repellat ullam suscipit. Veniam excepturi iusto optio voluptates? Doloremque fugiat dignissimos explicabo corporis quas itaque deserunt ipsa."
+      text: "在學習 JavaScript 之前，我都是使用 Python，在看到前端框架的發展後，我也開始嘗試前後端都使用 JavaScript 來進行開發，而這個網站也就是我的第一個 Full Stack JavaScript Website。"
     },
     {
-      title: "Vue 3",
-      text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure sequi, minima maiores temporibus repellat ullam suscipit. Veniam excepturi iusto optio voluptates? Doloremque fugiat dignissimos explicabo corporis quas itaque deserunt ipsa."
+      title: "Blog",
+      text: "記錄這些時間所學到的東西，並寫成筆記進行統整，不論是前端還是後端、網頁框架、資料庫的運用與 Docker 的使用等等...，也不一定只有網頁相關，可能也會有關於程式語言的部分。"
     },
     {
-      title: "Express",
-      text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure sequi, minima maiores temporibus repellat ullam suscipit. Veniam excepturi iusto optio voluptates? Doloremque fugiat dignissimos explicabo corporis quas itaque deserunt ipsa."
+      title: "Study Journey",
+      text: "最一開始我學習的語言是C/C++，後來使用Unity3D(C#)學習製作遊戲，有替朋友的畢業專題寫出一個手機遊戲，在大學時，我接觸到網頁的世界，對資料庫應用以及伺服器架設著迷。"
     }
   ]
+
+  const contactLinks = [
+		{
+			name: "Instagram", 
+			link: "https://www.instagram.com/mango70225/"
+		},
+		{
+			name: "Email",
+			link: "mailto:et860525@gmail.com?subject=Hello"
+		}
+	]
 </script>
 
 <template>
@@ -27,14 +38,26 @@
         I'm Yu Fan
       </h1>
       <img src="../assets/images/Mango.png" alt="Mango.png" class="mx-auto w-64">
-      <p class="px-10 sm:px-32 mb-20">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque odit, aspernatur quos rem vel modi rerum dolorem at quod delectus illum nisi dolor qui inventore et dolores accusantium numquam doloribus.</p>
+      <p class="px-10 sm:px-32 mb-20 text-xl font-bold">從前端學到後端，再從後端學到框架，而這裡就是記錄所有的地方。</p>
     </div>    
-    <hr>
-    <div id="cards" class="px-10 my-28">
-      <div class="grid gap-4 grid-cols-1 sm:grid-cols-3 grid-rows-3">
+    <div id="cards" class="px-10 my-16">
+      <div class="grid gap-4 grid-cols-1 sm:grid-cols-3 grid-rows-1">
         <!-- <Card :title="'JavaScript'" :text="cardText"></Card>  -->
         <Card v-for="card in cards" :title="card.title" :text="card.text"></Card>
       </div>
+    </div>
+    <hr>
+    <div id="blog-posts" class="px-10 my-28">
+      <h1 class="text-4xl font-bold">Blog posts</h1>
+    </div>
+    <hr>
+    <div id="contact" class="px-10 my-16">
+      <h1 class="text-4xl font-bold">Contact</h1>
+      <ul class="flex space-x-5 py-2 mt-5 sm:py-0 justify-center">
+        <li v-for="link in contactLinks">
+          <a :href="link.link">{{link.name}}</a>
+        </li>
+      </ul>
     </div>
   </div>
 </template>

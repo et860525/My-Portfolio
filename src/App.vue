@@ -11,11 +11,15 @@ import NavItem from './components/NavItem.vue'
     <!-- 用 to 屬性來處理 URL -->
     <NavItem to="/" :isActive="true">Home</NavItem>
     <NavItem to="/about">About</NavItem>
-    <NavItem to="/contact">Contact</NavItem>
+    <NavItem to="/blog">Blog</NavItem>
   </Nav>
 
   <!-- 根據 route 渲染相對的 .vue -->
   <router-view class="text-slate-700 text-lg"></router-view>
+  
+  <div class="text-sm border-t border-slate-300">
+    Copyright Mango <i class="fa-regular fa-copyright"></i> 2022
+  </div>
 </template>
 
 <style>
