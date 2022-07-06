@@ -23,6 +23,9 @@
 							Yu Fan, Chen
 						</div> -->
 						<div class="text-slate-600 dark:text-slate-500 mt-8">
+							<a href="https://github.com/et860525" class="text-2xl inline-block mr-5">
+								<i class="fa-brands fa-github"></i>
+							</a>
 							<a href="https://www.instagram.com/mango70225/" class="text-2xl inline-block mr-5">
 								<i class="fa-brands fa-instagram"></i>
 							</a>

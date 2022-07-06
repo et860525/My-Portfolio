@@ -17,6 +17,10 @@
   ]
 
   const contactLinks = [
+    {
+      name: "Github",
+      link: "https://github.com/et860525"
+    },
 		{
 			name: "Instagram", 
 			link: "https://www.instagram.com/mango70225/"
