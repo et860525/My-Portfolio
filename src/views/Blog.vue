@@ -49,8 +49,7 @@
 	}
 
 	// Set number to control how many post in one page
-	const perPage = 9;
-
+	const perPage: number = 9;
 	
 	/*
 	 使用 Object.entries(obj) 才能對 object做 array的相關的指令，如: slice, map...
@@ -62,11 +61,10 @@
 	* 3. Slice the posts depending "perPage" number 
 	*/
 	const paginatedData = computed(() => 
-    Object.entries(posts.value).map((item) => {
-			return { index: item[0], value: item[1] }
-		}).slice((page.value - 1) * perPage, page.value * perPage)
+			Object.entries(posts.value).map((item) => {
+				return { index: item[0], value: item[1] }
+			}).slice((page.value - 1) * perPage, page.value * perPage)
   );
-
 
 	// Show next button when page not in last
 	const nextPage = () => {
@@ -85,6 +83,103 @@
 			return true;
 		}
   };
+
+	const setPageArray = (_start: number, _end: number) => {
+		let _pageArray: string[] = []
+		for (let i = _start; i <= _end; i++) {
+			_pageArray.push(String(i));
+		}
+		return _pageArray;
+	}
+
+	// Omit the page depending Current page
+	const pageTest = () => {
+		let start: number = 0;
+		let end: number = 0;
+		let pageLength: number = Math.ceil(Object.entries(posts.value).length / perPage);
+		let pageArray: string[] = [];
+
+		switch (page.value) {
+			case 1:
+				start = 1;
+				end = 5;
+				
+				pageArray = setPageArray(start, end);
+
+				pageArray.push('...');
+				pageArray.push(String(pageLength));
+				break;
+			case 2:
+				start = page.value - 1;
+				end = page.value + 2;
+
+				pageArray = setPageArray(start, end);
+				pageArray.push('...');
+				pageArray.push(String(pageLength));
+				break;
+			case 3:
+				start = page.value - 2;
+				end = page.value + 2;
+				
+				pageArray = setPageArray(start, end);
+				pageArray.push('...');
+				pageArray.push(String(pageLength));
+				break;
+			case 4:
+				start = page.value - 2;
+				end = page.value + 2;
+				
+				pageArray = setPageArray(start, end);
+				pageArray.unshift('1');
+				pageArray.push('...');
+				pageArray.push(String(pageLength));
+				break;
+			case pageLength - 3:
+				start = page.value - 2;
+				end = page.value + 2;
+				
+				pageArray = setPageArray(start, end);
+				pageArray.unshift('...');
+				pageArray.unshift('1');
+				pageArray.push(String(pageLength));
+				break;
+			case pageLength - 2:
+				start = page.value - 2;
+				end = page.value + 2;
+				
+				pageArray = setPageArray(start, end);
+				pageArray.unshift('...');
+				pageArray.unshift('1');
+				break;
+			case pageLength - 1:
+				start = page.value - 2;
+				end = page.value + 1;
+				
+				pageArray = setPageArray(start, end);
+				pageArray.unshift('...');
+				pageArray.unshift('1');
+				break;
+			case pageLength:
+				start = page.value - 2;
+				end = page.value;
+				
+				pageArray = setPageArray(start, end);
+				pageArray.unshift('...');
+				pageArray.unshift('1');
+				break;
+			default:
+				start = page.value - 2;
+				end = page.value + 2;
+				
+				pageArray = setPageArray(start, end);
+				pageArray.unshift('...');
+				pageArray.unshift('1');
+				pageArray.push('...');
+				pageArray.push(String(pageLength));
+		}
+		return pageArray;
+	}
+
 </script>
 
 <template>
@@ -143,17 +238,55 @@
 							<span class="sr-only">Previous</span>
 							&lt; Previous
 						</a>
-						<!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-						<!-- <a href="#" aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 1 </a> -->
-						<!-- General: <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 2 </a> -->
-						<a
-							v-for="item in Math.ceil(Object.entries(posts).length / perPage)"
-							:href="'/blog/page/' + item"
+						<!-- Current page: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+						<!-- General page: <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 2 </a> -->
+						<div
+							v-for="item in pageTest()"
 							:key="item"
-							class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
 						>
+							<a
+								v-if="page === Number(item)"
+								:href="'/blog/page/' + item" 
+								class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+							>
 							{{ item }}
-						</a>
+							</a>
+							<span 
+								v-else-if="item === '...'"
+								:href="'/blog/page/' + item" 
+								class="bg-white border-gray-300 text-gray-500 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+							>
+							{{ item }}
+							</span>
+							<a v-cloak
+								v-else
+								:href="'/blog/page/' + item" 
+								class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+							>
+							{{ item }}
+							</a>
+						</div>
+
+						<!-- Stable Version -->
+						<!-- <div
+							v-for="item in Math.ceil(Object.entries(posts).length / perPage)"
+							:key="item"
+						>
+							<a 
+								v-if="page === item"
+								:href="'/blog/page/' + item" 
+								class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+							>
+							{{ item }}
+							</a>
+							<a 
+								v-else
+								:href="'/blog/page/' + item" 
+								class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+							>
+							{{ item }}
+							</a>
+						</div> -->
 						<a 
 							v-if="nextPage()"
 							:href="'/blog/page/' + (page + 1)"
