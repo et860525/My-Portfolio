@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import Card from "../components/Card.vue";
+  import axios from "axios";
 
   const cards = [
     {
@@ -30,6 +31,12 @@
 			link: "mailto:et860525@gmail.com?subject=Hello"
 		}
 	]
+
+  function getMsg() {
+    axios.get('http://localhost:3000/blog/categories').then(function (res) {
+      console.log('res=', res);
+    })
+  }
 </script>
 
 <template>
@@ -42,7 +49,7 @@
         I'm Yu Fan
       </h1>
       <img src="../assets/images/Mango.png" alt="Mango.png" class="mx-auto w-64">
-      <p class="px-10 sm:px-32 mb-20 text-xl font-bold">從前端學到後端，再從後端學到框架，而這裡就是記錄所有的地方。</p>
+      <p class="px-10 sm:px-32 mb-20 text-xl font-bold">從前端學到後端，而這裡就是記錄所有的地方。</p>
     </div>    
     <div id="cards" class="px-10 my-16">
       <div class="grid gap-4 grid-cols-1 sm:grid-cols-3 grid-rows-1">
@@ -55,6 +62,7 @@
       <h1 class="text-4xl font-bold">Blog posts</h1>
     </div>
     <hr>
+    <button type="button" name="button" v-on:click="getMsg">get</button>
     <div id="contact" class="px-10 my-16">
       <h1 class="text-4xl font-bold">Contact</h1>
       <ul class="flex space-x-5 py-2 mt-5 sm:py-0 justify-center">

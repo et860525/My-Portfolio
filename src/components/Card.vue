@@ -17,7 +17,7 @@
 		<div class="p-6">
 			<h1 class="font-bold">{{cardProps.title}}</h1>
 			<hr>
-			<p class="pt-4 leading-loose">{{cardProps.text}}</p>
+			<p class="pt-4 leading-loose text-sm md:text-base md:leading-loose">{{cardProps.text}}</p>
 		</div>
 	</div>
 </template>

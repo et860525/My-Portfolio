@@ -4,7 +4,7 @@
 	import type { Ref } from 'vue';
 	import { useRoute } from 'vue-router';
 	import axios from 'axios';
-	import Post from '../components/Post.vue';
+	import PostCard from '../components/PostCard.vue';
 
 	/* Test data */
 	// Change to not required
@@ -190,7 +190,7 @@
 		<div class="grid grid-cols-12 gap-0 sm:gap-8 py-10">
 			<div class="col-span-12 md:col-span-9">
 				<div class="grid grid-rows-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-					<Post v-for="post in paginatedData" :key="post.index" :id="post.value.id" :title="post.value.title" :body="post.value.body"></Post>
+					<PostCard v-for="post in paginatedData" :key="post.index" :id="post.value.id" :title="post.value.title" :body="post.value.body"></PostCard>
 				</div>
 			</div>
 			<div class="col-span-12 mt-8 md:col-span-3 md:mt-0">
@@ -207,7 +207,18 @@
 		
 		<div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
 			<div class="flex-1 flex justify-between sm:hidden">
-				<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Previous </a>
+				<a 
+					v-if="page === 1"
+					:href="'/blog/page/' + (page - 1)" 
+					class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> 
+					Previous 
+				</a>
+				<a 
+					v-else
+					href="#" 
+					class="cursor-not-allowed relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> 
+					Previous 
+				</a>
 				<a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Next </a>
 			</div>
 			<div class="hidden flex-col sm:flex-1 sm:flex sm:items-center sm:justify-between">
